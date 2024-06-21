@@ -32,7 +32,14 @@ async function addNewTodo(todoText) {
   return res;
 }
 
+
+async function deleteTodo(id) {
+  const res = await Model.findOneAndDelete({id})
+  return res
+}
+
 module.exports = {
   addNewTodo,
   getAllTodos,
+  deleteTodo
 };
