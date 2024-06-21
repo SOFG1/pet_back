@@ -1,5 +1,5 @@
 const express = require("express")
-const todosRouter = require("./routes/todos.router")
+const todosRouter = require("./routes/todos/todos.router")
 
 
 const api = express.Router()

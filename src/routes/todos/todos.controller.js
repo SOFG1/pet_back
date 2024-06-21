@@ -1,4 +1,4 @@
-const todos = require("../models/todos")
+const todos = require("../../models/todos")
 
 
 async function httpGetAllTodos(req, res) {
