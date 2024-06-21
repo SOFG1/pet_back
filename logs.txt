@@ -1,0 +1,32 @@
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+::1 - - [21/Jun/2024:18:00:35 +0000] "GET /v1/todos/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+::1 - - [21/Jun/2024:18:00:35 +0000] "GET /v1/todos/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+::1 - - [21/Jun/2024:18:00:36 +0000] "DELETE /v1/todos/2 HTTP/1.1" 200 - "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+Connected to MongoDB
+Server is listening on 8000
+Connected to MongoDB
+Server is listening on 8000
+::1 - - [21/Jun/2024:18:00:38 +0000] "POST /v1/todos/ HTTP/1.1" 201 66 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+::1 - - [21/Jun/2024:18:00:39 +0000] "POST /v1/todos/ HTTP/1.1" 400 21 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+::1 - - [21/Jun/2024:18:00:42 +0000] "POST /v1/todos/ HTTP/1.1" 201 67 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+::1 - - [21/Jun/2024:18:00:46 +0000] "PATCH /v1/todos/3 HTTP/1.1" 200 67 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+::1 - - [21/Jun/2024:18:00:46 +0000] "GET /v1/todos/ HTTP/1.1" 200 200 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
