@@ -7,6 +7,13 @@ async function httpGetAllTodos(req, res) {
 }
 
 
+async function httpAddTodo(req, res) {
+  const data = await todos.addNewTodo(req.body.text)
+  return res.status(201).json(data)
+}
+
+
 module.exports = {
-    httpGetAllTodos
+    httpGetAllTodos,
+    httpAddTodo
 }
