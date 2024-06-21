@@ -3,7 +3,8 @@ const todos = require("../../models/todos");
 async function httpGetAllTodos(req, res) {
   try {
     const data = await todos.getAllTodos();
-    return res.status(200).json(data);
+    const formated = data.map(({id, text}) => {id, text})
+    return res.status(200).json(formated);
   } catch (e) {
     return res.status(500).json(["Error occured"]);
   }
