@@ -27,8 +27,18 @@ async function httpDeleteTodo(req, res) {
   }
 }
 
+async function httpEditTodo(req, res) {
+  try {
+    const data = await todos.editTodo(req.params.id, req.body.text);
+    return res.status(200).json(data)
+  } catch (e) {
+    return res.status(500).json(["Coudn't delete a todo with specified id"]);
+  }
+}
+
 module.exports = {
   httpGetAllTodos,
   httpAddTodo,
   httpDeleteTodo,
+  httpEditTodo
 };

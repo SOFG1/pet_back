@@ -38,8 +38,14 @@ async function deleteTodo(id) {
   return res
 }
 
+async function editTodo(id, text) {
+  const res = await Model.findOneAndUpdate({id}, {text})
+  return res
+}
+
 module.exports = {
   addNewTodo,
   getAllTodos,
-  deleteTodo
+  deleteTodo,
+  editTodo
 };
