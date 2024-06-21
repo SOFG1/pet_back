@@ -31,13 +31,19 @@ const createUser = async (login, pass) => {
   return res;
 };
 
-
 const findUser = async (login) => {
-    const res = await Model.findOne({login})
-    return res?._doc
-  };
+  const res = await Model.findOne({ login });
+  return res?._doc;
+};
+
+const findUserById = async (_id) => {
+  const user = await Model.findOne({ _id });
+  const { passwordHash: h, ...userData } = user._doc;
+  return userData;
+};
 
 module.exports = {
   createUser,
-  findUser
+  findUser,
+  findUserById
 };
