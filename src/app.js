@@ -17,4 +17,10 @@ app.use(express.json());
 //API
 app.use("/v1", api);
 
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+
 module.exports = app;
