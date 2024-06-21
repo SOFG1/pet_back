@@ -6,12 +6,9 @@ const api = require("./api");
 const app = express();
 
 //CORS
-app.use(
-  cors({
-  //  origin: ["http://localhost:3000", "http://localhost:5173", "https://sofg1.github.io/pet_front/"],
-    origin: "*",
-  })
-);
+//  origin: ["http://localhost:3000", "http://localhost:5173", "https://sofg1.github.io/pet_front/"],
+
+app.use(cors());
 
 //Loging
 app.use(morgan("combined"));
