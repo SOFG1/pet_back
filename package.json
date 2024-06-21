@@ -4,8 +4,21 @@
   "description": "API project for pet project",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "start": "nodemon src/server.js",
+    "watch": "node src/server.js",
+    "cluster": "pm2 start src/server.js -n nasa -i max -l logs.txt",
+    "stop-cluster": "pm2 stop nasa && pm2 delete nasa"
   },
   "author": "Eduard Kosyan edkosyan2000@gmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.7"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.3",
+    "morgan": "^1.10.0"
+  }
 }
