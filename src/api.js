@@ -1,11 +1,11 @@
 const express = require("express")
-//const planetsRouter = require("./routes/planets/planets.router")
+const todosRouter = require("./routes/todos.router")
 
 
 const api = express.Router()
 
 
 //Routes
-//api.use("/planets", planetsRouter)
+api.use("/todos", todosRouter)
 
 module.exports = api
