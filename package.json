@@ -1,0 +1,11 @@
+{
+  "name": "pet_back",
+  "version": "1.0.0",
+  "description": "API project for pet project",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Eduard Kosyan edkosyan2000@gmail.com",
+  "license": "ISC"
+}
