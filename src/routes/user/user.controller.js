@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { createUser } = require("../../models/user");
+const { createUser, findUser } = require("../../models/user");
 
 //Sign up
 async function httpCreateUser(req, res) {
@@ -27,6 +27,43 @@ async function httpCreateUser(req, res) {
   }
 }
 
+
+//Sign in
+async function httpUserSignIn(req, res) {
+  try {
+    const user = await findUser(req.body.login);
+    if (!user) {
+      return res.status(404).json(["Invalid user's credentials"]);
+    }
+    const isValidPass = await bcrypt.compare(
+      req.body.pass,
+      user.passwordHash
+    );
+    if (!isValidPass) {
+      return res.status(404).json(["Invalid user's credentials"]);
+    }
+
+    const token = jwt.sign(
+      {
+        _id: user._id,
+      },
+      "secret123",
+      {
+        expiresIn: "30d",
+      }
+    );
+
+    const { passwordHash: h, login, createdAt } = user;
+    return res.status(200).json({ login, createdAt, token });
+  } catch (e) {
+    return res.status(404).json(["Invalid user's credentials"]);
+  }
+}
+
+
+
+
 module.exports = {
   httpCreateUser,
+  httpUserSignIn
 };
