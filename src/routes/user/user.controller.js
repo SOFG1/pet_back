@@ -5,6 +5,7 @@ const {
   findUser,
   findUserById,
   deleteUser,
+  changeUserPass,
 } = require("../../models/user");
 
 //Sign up
@@ -96,9 +97,40 @@ async function httpDeleteProfile(req, res) {
   }
 }
 
+
+
+//Reset password
+async function httpUserResetPassword(req, res) {
+  try {
+    const user = await findUserById(req._id);
+    if (!user) {
+      return res.status(404).json(["User not found"]);
+    }
+    const isValidPass = await bcrypt.compare(req.body.oldPass, user.passwordHash);
+    if (!isValidPass) {
+      return res.status(404).json(["Invalid password"]);
+    }
+    const updatedUser = await changeUserPass(req._id, req.body.newPass)
+    const { passwordHash: h, login, createdAt } = updatedUser;
+    const token = jwt.sign(
+      {
+        _id: user._id,
+      },
+      "secret123",
+      {
+        expiresIn: "30d",
+      }
+    );
+    return res.status(200).json({ login, createdAt, token });
+  } catch (e) {
+    return res.status(404).json(["Invalid user's credentials"]);
+  }
+}
+
 module.exports = {
   httpCreateUser,
   httpUserSignIn,
   httpUsersAuth,
   httpDeleteProfile,
+  httpUserResetPassword
 };

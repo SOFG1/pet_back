@@ -31,6 +31,13 @@ const createUser = async (login, pass) => {
   return res;
 };
 
+const changeUserPass = async (_id, pass) => {
+  const salt = await bcrypt.genSalt(10);
+  const passwordHash = await bcrypt.hash(pass, salt);
+  const res = await Model.findOneAndUpdate({_id}, {passwordHash});
+  return res?._doc;
+};
+
 const findUser = async (login) => {
   const res = await Model.findOne({ login });
   return res?._doc;
@@ -50,5 +57,6 @@ module.exports = {
   createUser,
   findUser,
   findUserById,
-  deleteUser
+  deleteUser,
+  changeUserPass
 };

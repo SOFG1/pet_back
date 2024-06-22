@@ -3,7 +3,7 @@ const {
   handleValidationErrors,
 } = require("../../utils/handleValidationErrors");
 const userController = require("./user.controller");
-const { createUserValidator, deleteUserValidator } = require("./user.validators");
+const { createUserValidator, deleteUserValidator, resetPassValidator } = require("./user.validators");
 const { checkAuth } = require("../../utils/checkAuth");
 
 const todosRouter = express.Router();
@@ -30,6 +30,16 @@ todosRouter.delete(
   deleteUserValidator,
   handleValidationErrors,
   userController.httpDeleteProfile
+);
+
+
+
+todosRouter.post(
+  "/reset-password",
+  checkAuth,
+  resetPassValidator,
+  handleValidationErrors,
+  userController.httpUserResetPassword
 );
 
 module.exports = todosRouter;
