@@ -1,6 +1,11 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { createUser, findUser, findUserById } = require("../../models/user");
+const {
+  createUser,
+  findUser,
+  findUserById,
+  deleteUser,
+} = require("../../models/user");
 
 //Sign up
 async function httpCreateUser(req, res) {
@@ -70,8 +75,30 @@ async function httpUsersAuth(req, res) {
   }
 }
 
+//Permanently delete profile
+async function httpDeleteProfile(req, res) {
+  try {
+    const user = await findUserById(req._id);
+    if (!user) {
+      return res.status(404).json(["Invalid password"]);
+    }
+    const isValidPass = await bcrypt.compare(
+      req.query.pass,
+      user.passwordHash
+    );
+    if (!isValidPass) {
+      return res.status(404).json(["Invalid password"]);
+    }
+    await deleteUser(req._id);
+    return res.status(200).json()
+  } catch (e) {
+    return res.status(500).json(["Internal server error"]);
+  }
+}
+
 module.exports = {
   httpCreateUser,
   httpUserSignIn,
   httpUsersAuth,
+  httpDeleteProfile,
 };

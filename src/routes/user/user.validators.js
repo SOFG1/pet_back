@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, query } = require("express-validator");
 
 
 
@@ -9,6 +9,11 @@ const createUserValidator = [
 ]
 
 
+const deleteUserValidator = [
+    query("pass", "Invalid password").isString().isLength({min: 3}),
+]
+
 module.exports = {
-    createUserValidator
+    createUserValidator,
+    deleteUserValidator
 }

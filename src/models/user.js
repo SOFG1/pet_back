@@ -38,12 +38,17 @@ const findUser = async (login) => {
 
 const findUserById = async (_id) => {
   const user = await Model.findOne({ _id });
-  const { passwordHash: h, ...userData } = user._doc;
-  return userData;
+  return user._doc;
+};
+
+
+const deleteUser = async (_id) => {
+ return await Model.findOneAndDelete({ _id });
 };
 
 module.exports = {
   createUser,
   findUser,
-  findUserById
+  findUserById,
+  deleteUser
 };
