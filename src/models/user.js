@@ -37,7 +37,7 @@ const createUser = async (login, pass) => {
 const changeUserPass = async (_id, pass) => {
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(pass, salt);
-  const res = await Model.findOneAndUpdate({_id}, {passwordHash});
+  const res = await Model.findOneAndUpdate({ _id }, { passwordHash });
   return res?._doc;
 };
 
@@ -51,20 +51,22 @@ const findUserById = async (_id) => {
   return user._doc;
 };
 
-
 const deleteUser = async (_id) => {
- return await Model.findOneAndDelete({ _id });
+  return await Model.findOneAndDelete({ _id });
 };
 
-
 const changeUserPhoto = async (_id, photoName) => {
-  const user =  await Model.findOneAndUpdate({_id}, {photoName: `/uploads/${photoName}`})
-  return user._doc
-}
+  const user = await Model.findOneAndUpdate(
+    { _id },
+    { photoName: `/uploads/${photoName}` }
+  );
+  return user._doc;
+};
 
 const getUsers = async (offset) => {
-  const res = await Model.find({}).skip(offset).limit(5)
-  return res
+  const count = await Model.find({}).count();
+  const users = await Model.find({}).skip(offset).limit(5);
+  return { users, count }; 
 };
 
 module.exports = {
@@ -74,5 +76,5 @@ module.exports = {
   deleteUser,
   changeUserPass,
   changeUserPhoto,
-  getUsers
+  getUsers,
 };
