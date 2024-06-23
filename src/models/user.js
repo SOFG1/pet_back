@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema(
     photoName: {
       type: String,
     },
+    likes: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {
     timestamps: true,
@@ -58,7 +59,8 @@ const deleteUser = async (_id) => {
 const changeUserPhoto = async (_id, photoName) => {
   const user = await Model.findOneAndUpdate(
     { _id },
-    { photoName: `/uploads/${photoName}` }
+    { photoName: `/uploads/${photoName}` },
+    { new: true }
   );
   return user._doc;
 };
@@ -66,7 +68,16 @@ const changeUserPhoto = async (_id, photoName) => {
 const getUsers = async (offset) => {
   const count = await Model.find({}).count();
   const users = await Model.find({}).skip(offset).limit(5);
-  return { users, count }; 
+  return { users, count };
+};
+
+const setLike = async (subjUserId, objUserId) => {
+  const subjUser = await Model.findOne({ _id: subjUserId });
+  const objUser = await Model.findOneAndUpdate(
+    { _id: objUserId },
+    { likes: objUserId }
+  );
+  return objUser;
 };
 
 module.exports = {
@@ -77,4 +88,5 @@ module.exports = {
   changeUserPass,
   changeUserPhoto,
   getUsers,
+  setLike,
 };
