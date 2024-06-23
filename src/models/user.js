@@ -62,11 +62,17 @@ const changeUserPhoto = async (_id, photoName) => {
   return user._doc
 }
 
+const getUsers = async (offset) => {
+  const res = await Model.find({}).skip(offset).limit(5)
+  return res
+};
+
 module.exports = {
   createUser,
   findUser,
   findUserById,
   deleteUser,
   changeUserPass,
-  changeUserPhoto
+  changeUserPhoto,
+  getUsers
 };

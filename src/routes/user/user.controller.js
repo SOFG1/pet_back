@@ -70,7 +70,7 @@ async function httpUsersAuth(req, res) {
       const token = req.headers.authorization;
       return res.json(formatUserData({ ...user, token }));
     }
-    return res.stats(404).json(["User not found"]);
+    return res.status(404).json(["User not found"]);
   } catch (e) {
     return res.status(500).json(["Internal server error"]);
   }
