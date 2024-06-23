@@ -12,10 +12,14 @@ async function httpGetUsers(req, res) {
 }
 
 async function httpSetLike(req, res) {
+  if(req._id === req.body.id) {
+    return res.status(400).json(["You can not like yourself"]);
+  }
   try {
-    const res = await setLike(req._id, req.body.id)
-    return res.json(res);
+    const result = await setLike(req._id, req.body.id)
+    return res.status(200).json(result);
   } catch (e) {
+    console.log(e)
     return res.status(500).json(["Internal server error"]);
   }
 }

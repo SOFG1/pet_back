@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
     photoName: {
       type: String,
     },
-    likes: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
   },
   {
     timestamps: true,
@@ -72,12 +72,19 @@ const getUsers = async (offset) => {
 };
 
 const setLike = async (subjUserId, objUserId) => {
-  const subjUser = await Model.findOne({ _id: subjUserId });
-  const objUser = await Model.findOneAndUpdate(
-    { _id: objUserId },
-    { likes: objUserId }
-  );
-  return objUser;
+  const objUser = await Model.findOne({ _id: objUserId });
+  if (!objUser.likes.includes(subjUserId)) {
+    console.log("no");
+    objUser.likes = [...objUser.likes, subjUserId];
+    const saved = await objUser.save();
+    return saved;
+  }
+  if (objUser.likes.includes(subjUserId)) {
+    console.log("yes");
+    objUser.likes = objUser.likes.filter((id) => id.toString() !== subjUserId);
+    const saved = await objUser.save();
+    return saved;
+  }
 };
 
 module.exports = {
