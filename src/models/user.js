@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    photoName: {
+      type: String,
+    },
   },
   {
     timestamps: true,
@@ -53,10 +56,17 @@ const deleteUser = async (_id) => {
  return await Model.findOneAndDelete({ _id });
 };
 
+
+const changeUserPhoto = async (_id, photoName) => {
+  const user =  await Model.findOneAndUpdate({_id}, {photoName: `/uploads/${photoName}`})
+  return user._doc
+}
+
 module.exports = {
   createUser,
   findUser,
   findUserById,
   deleteUser,
-  changeUserPass
+  changeUserPass,
+  changeUserPhoto
 };

@@ -5,26 +5,27 @@ const {
 const userController = require("./user.controller");
 const { createUserValidator, deleteUserValidator, resetPassValidator } = require("./user.validators");
 const { checkAuth } = require("../../utils/checkAuth");
+const { upload } = require("../../utils/upload");
 
-const todosRouter = express.Router();
+const userRouter = express.Router();
 
-todosRouter.post(
+userRouter.post(
   "/sign-up",
   createUserValidator,
   handleValidationErrors,
   userController.httpCreateUser
 );
 
-todosRouter.post(
+userRouter.post(
   "/sign-in",
   createUserValidator,
   handleValidationErrors,
   userController.httpUserSignIn
 );
 
-todosRouter.get("/auth", checkAuth, userController.httpUsersAuth);
+userRouter.get("/auth", checkAuth, userController.httpUsersAuth);
 
-todosRouter.delete(
+userRouter.delete(
   "/",
   checkAuth,
   deleteUserValidator,
@@ -34,7 +35,7 @@ todosRouter.delete(
 
 
 
-todosRouter.post(
+userRouter.post(
   "/reset-password",
   checkAuth,
   resetPassValidator,
@@ -42,4 +43,17 @@ todosRouter.post(
   userController.httpUserResetPassword
 );
 
-module.exports = todosRouter;
+
+userRouter.post(
+  "/upload-photo",
+  checkAuth,
+  upload.single("file"),
+  userController.httpUploadUserImage
+);
+
+
+
+
+
+
+module.exports = userRouter;
