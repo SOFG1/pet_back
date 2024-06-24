@@ -27,7 +27,7 @@ async function httpSetLike(req, res) {
 async function increaseUsersExperience() {
   setInterval(() => {
     increaseAllUsersExp();
-  }, 1000 * 60 * 60 * 24);
+  }, 1000 * 60 * 60);
 }
 
 module.exports = {
