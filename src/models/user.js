@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
     photoName: {
       type: String,
     },
+    experience: {
+      type: Number,
+      default: 0,
+    },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
   },
   {
@@ -87,6 +91,11 @@ const setLike = async (subjUserId, objUserId) => {
   }
 };
 
+const increaseAllUsersExp = async () => {
+  const res = await Model.updateMany({}, { $inc: { experience: -1 } });
+  console.log(res)
+};
+
 module.exports = {
   createUser,
   findUser,
@@ -96,4 +105,5 @@ module.exports = {
   changeUserPhoto,
   getUsers,
   setLike,
+  increaseAllUsersExp,
 };
