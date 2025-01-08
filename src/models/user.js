@@ -92,7 +92,7 @@ const setLike = async (subjUserId, objUserId) => {
 };
 
 const increaseAllUsersExp = async () => {
-  const res = await Model.updateMany({}, { $inc: { experience: -1 } });
+  const res = await Model.updateMany({}, { $inc: { experience: 1 } });
   console.log(res)
 };
 

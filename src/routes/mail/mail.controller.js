@@ -17,17 +17,15 @@ async function httpSendEmail(req, res) {
       text: req.body.text,
     };
 
-
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        console.log(error)
-        console.log(info)
-        res.status(500).json(["Error occured while sending email"])
+        console.log(error);
+        console.log(info);
+        res.status(500).json(["Error occured while sending email"]);
       } else {
         res.json("Email sent: " + info.response);
       }
     });
-
   } catch (e) {
     return res.status(500).json(["Error occured"]);
   }

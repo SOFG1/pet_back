@@ -127,10 +127,8 @@ async function httpUserResetPassword(req, res) {
 async function httpUploadUserImage(req, res) {
   try {
     const updatedUser = await changeUserPhoto(req._id, req.fileName);
-    const token = req.headers.authorization
-    res.json(
-      formatUserData({ ...updatedUser, token })
-    );
+    const token = req.headers.authorization;
+    res.json(formatUserData({ ...updatedUser, token }));
   } catch (e) {
     return res.status(500).json(["Error occured"]);
   }

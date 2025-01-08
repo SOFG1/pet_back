@@ -3,7 +3,11 @@ const {
   handleValidationErrors,
 } = require("../../utils/handleValidationErrors");
 const userController = require("./user.controller");
-const { createUserValidator, deleteUserValidator, resetPassValidator } = require("./user.validators");
+const {
+  createUserValidator,
+  deleteUserValidator,
+  resetPassValidator,
+} = require("./user.validators");
 const { checkAuth } = require("../../utils/checkAuth");
 const { upload } = require("../../utils/upload");
 
@@ -33,8 +37,6 @@ userRouter.delete(
   userController.httpDeleteProfile
 );
 
-
-
 userRouter.post(
   "/reset-password",
   checkAuth,
@@ -43,17 +45,11 @@ userRouter.post(
   userController.httpUserResetPassword
 );
 
-
 userRouter.post(
   "/upload-photo",
   checkAuth,
   upload.single("file"),
   userController.httpUploadUserImage
 );
-
-
-
-
-
 
 module.exports = userRouter;
